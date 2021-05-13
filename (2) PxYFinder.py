@@ -17,10 +17,10 @@ gene_IDs = set()
 
 
 #Insert the path and file name of the downloaded BioGrid Tab 3.0 file here
-BioGridPath = '/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/ITCH PY Motif Analysis/ITCH biogrid file.txt'
+BioGridPath = 'your-biogrid-file-path.txt'
 
 #Insert the path and file name of the output GeneIds .txt file here
-GeneIDsOutput = '/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/ITCH PY Motif Analysis/ITCH GeneIDs redo.txt'
+GeneIDsOutput = 'your-output-file-name.txt'
 
 
 #Opens the .txt file downloaded from BioGrid containing the protein interactome as a csv
@@ -67,22 +67,22 @@ ___________
 import csv
 
 #Insert FASTA file path here
-FastaFilePath = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Updated Data (7-16-20)/WWP1/WWP1 Uniprot Fasta Download 7-16-20.fasta"
+FastaFilePath = "your-fasta-file-path.fasta"
 
 # (1) Insert file path / name for the first CSV to be created (UniProt Entry Name, UniProtKB ID, and FASTA sequence for each interactor)
-csv_one_path = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Test/test_wwp1_csv_one.csv"
+csv_one_path = "your-output-path-1.csv"
 
 # (2) Insert file path / name for the second CSV to be created (same as above with the addition of "PP", "PPY", "PPxY", and "LPxY")
-csv_two_path  = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Test/test_wwp1_csv_two.csv"
+csv_two_path  = "your-output-path-2.csv"
 
 # (3) Insert file path / name for the .txt file with a statistical breakdown of motifs
-summary_path = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Test/test_wwp1_summary.txt"
+summary_path = "your-output-path-summary.txt"
 
 # (4) Insert file path / name for the .txt file containing sequences to be used for WebLogos
-weblogo_path  = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Test/test_wwp1_weblogo.txt"
+weblogo_path  = "your-output-path-weblogo.txt"
 
 # (5) Insert file path / name for the .txt file containing Uniprot accession numbers for PANTHER
-accessions_path = "/Users/michaelpupi/Desktop/Summer Research Fellowship/PY motif project/Test/test_wwp1_accessions.txt"
+accessions_path = "your-output-path-accessions.txt"
 
 #__________________________________________________________________________________________
 #FASTA TO CSV
@@ -189,17 +189,17 @@ for row in rows:
 
     data.append(row)
     
-    #both forward  and reverse sequences collected so each can be iterated through
+    #both forward FASTA sequence collected so each can be iterated through
     sequence = row[2]
-    rev_sequence = sequence[::-1]
+    
 
     #using basic "in" command, checks if the forward or reverse sequences contain the "PP" and "PPY" motifs
-    if( ("PP" in sequence) or ("PP" in rev_sequence) ):
+    if( ("PP" in sequence):
         PP_list.append(1)
     else:
         PP_list.append(0)
 
-    if( ("PPY" in sequence) or ("PPY" in rev_sequence) ):
+    if( ("PPY" in sequence):
         PPY_list.append(1)
     else:
         PPY_list.append(0)
@@ -212,16 +212,13 @@ for row in rows:
     for x in range(0,len(sequence)-3):
         if sequence[x] == "P" and sequence[x+1] == "P" and sequence[x+3] =="Y":
             PPxY = 1
-        elif rev_sequence[x] == "P" and rev_sequence[x+1] == "P" and rev_sequence[x+3]  == "Y":
-            PPxY = 1
+
         
     PPxY_list.append(PPxY)
     
     LPxY = 0
     for x in range(0,len(sequence)-3):
         if sequence[x] == "L" and sequence[x+1] == "P" and sequence[x+3] =="Y":
-            LPxY = 1
-        elif rev_sequence[x] == "L" and rev_sequence[x+1] == "P" and rev_sequence[x+3]  == "Y":
             LPxY = 1
         
     LPxY_list.append(LPxY)
